@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import PracticeRounds from "./pages/PracticeRounds";
 import AptitudeTest from "./pages/AptitudeTest";
 import CodingEditor from "./pages/CodingEditor";
-import CodingContests from "./pages/CodingContests";
+import CodingContests from "./pages/coding/CodingContests";
 import CreateContest from "./pages/admin/CreateContest";
 import InterviewList from "./pages/InterviewList";
 import Aptitude from "./pages/Aptitude";
