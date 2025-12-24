@@ -47,7 +47,7 @@ export default function App() {
 
         <Route path="/coding" element={<Coding />} />
         <Route path="/coding-editor" element={<CodingEditor />} />
-        <Route path="/coding-contests" element={<CodingContests />} />
+       <Route path="/coding-contests" element={<CodingContests />} />
         <Route path="/admin/create-contest" element={<CreateContest />} />
 
 
