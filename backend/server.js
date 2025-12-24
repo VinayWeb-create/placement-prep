@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-
+const contestRoutes = require("./routes/contestRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
