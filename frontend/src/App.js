@@ -6,6 +6,7 @@ import PracticeRounds from "./pages/PracticeRounds";
 import AptitudeTest from "./pages/AptitudeTest";
 import CodingEditor from "./pages/CodingEditor";
 import CodingContests from "./pages/CodingContests";
+import CreateContest from "./pages/admin/CreateContest";
 import InterviewList from "./pages/InterviewList";
 import Aptitude from "./pages/Aptitude";
 import Coding from "./pages/Coding";
@@ -47,6 +48,8 @@ export default function App() {
         <Route path="/coding" element={<Coding />} />
         <Route path="/coding-editor" element={<CodingEditor />} />
         <Route path="/coding-contests" element={<CodingContests />} />
+        <Route path="/admin/create-contest" element={<CreateContest />} />
+
 
 
         <Route path="/interviews" element={<InterviewList />} />
