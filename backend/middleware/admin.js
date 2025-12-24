@@ -1,8 +1,5 @@
 module.exports = (req, res, next) => {
-  // req.user is already set by auth middleware
-  // Example decoded token: { id, email, role }
-
-  // TEMP LOGIC (works now, upgrade later)
+  // auth middleware must run before this
   if (
     req.user?.role === "admin" ||
     req.user?.email === "admin@gmail.com"
