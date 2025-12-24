@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
 
-
 export default function Login() {
   const navigate = useNavigate();
 
@@ -11,21 +10,33 @@ export default function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleLogin = async () => {
+    if (!form.email || !form.password) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
     try {
-      const res = await API.post("auth/login", form);
+      const res = await API.post("/auth/login", form);
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login successful!");
       navigate("/dashboard");
     } catch (err) {
-      alert(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.message || "Login failed. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,7 +45,9 @@ export default function Login() {
       <div className="login-card">
 
         <h1 className="login-title">Placement Prep Portal</h1>
-        <p className="login-subtitle">Login to continue your journey</p>
+        <p className="login-subtitle">
+          Login to continue your journey
+        </p>
 
         <input
           name="email"
@@ -42,6 +55,7 @@ export default function Login() {
           placeholder="Email"
           className="input"
           onChange={handleChange}
+          disabled={loading}
         />
 
         <input
@@ -50,10 +64,26 @@ export default function Login() {
           placeholder="Password"
           className="input"
           onChange={handleChange}
+          disabled={loading}
         />
 
-        <button className="btn-grad" onClick={handleLogin}>
-          Login
+        {/* Error Message */}
+        {error && (
+          <p style={{ color: "#ff6a6a", marginBottom: "10px", fontSize: "14px" }}>
+            {error}
+          </p>
+        )}
+
+        <button
+          className="btn-grad"
+          onClick={handleLogin}
+          disabled={loading}
+          style={{
+            opacity: loading ? 0.7 : 1,
+            cursor: loading ? "not-allowed" : "pointer",
+          }}
+        >
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className="login-footer">
