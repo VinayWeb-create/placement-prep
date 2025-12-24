@@ -19,7 +19,6 @@ import ResumeManager from "./pages/ResumeManager";
 
 /* ===== Contest System ===== */
 import CodingContests from "./pages/coding/CodingContests";
-import Leaderboard from "./pages/Leaderboard";
 
 /* ===== Admin ===== */
 import CreateContest from "./pages/admin/CreateContest";
