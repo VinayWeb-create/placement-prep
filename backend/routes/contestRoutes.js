@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Problem = require("../models/Problem");
-const auth = require("../middleware/auth");
+const auth = require("../middleware/auth"); // 🔥 MUST MATCH EXACTLY
+
 
 // ✅ GET problems for a contest (protected)
 router.get("/:id/problems", auth, async (req, res) => {
