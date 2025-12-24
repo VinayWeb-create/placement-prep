@@ -22,6 +22,7 @@ app.use(express.json());
 
 /* ---------- ROUTES ---------- */
 app.use("/api/auth", authRoutes);
+app.use("/api/contests", require("./routes/contestRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Backend Running Successfully 🚀");
