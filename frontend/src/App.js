@@ -15,22 +15,20 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/profile";
 import ResumeManager from "./pages/ResumeManager";
 import HRPractice from "./pages/HRPractice";
+import Leaderboard from "./pages/Leaderboard";
 import ProtectedRoute from "./ProtectedRoute";
 import "./global.css";
-
-// OPTIONAL: uncomment if you have the file
-// import ResultPage from "./pages/ResultPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Public Routes */}
+        {/* Public */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Protected Route */}
+        {/* Protected Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -40,27 +38,32 @@ export default function App() {
           }
         />
 
-        {/* Other Pages */}
+        {/* Practice */}
         <Route path="/practice" element={<PracticeRounds />} />
         <Route path="/aptitude" element={<Aptitude />} />
         <Route path="/aptitude-test" element={<AptitudeTest />} />
 
+        {/* Coding */}
         <Route path="/coding" element={<Coding />} />
         <Route path="/coding-editor" element={<CodingEditor />} />
-       <Route path="/coding-contests" element={<CodingContests />} />
+        <Route path="/coding-contests" element={<CodingContests />} />
+
+        {/* ✅ CONTEST FLOW (CRITICAL) */}
+        <Route path="/contest/:contestId" element={<CodingEditor />} />
+        <Route
+          path="/contest/:contestId/leaderboard"
+          element={<Leaderboard />}
+        />
+
+        {/* Admin */}
         <Route path="/admin/create-contest" element={<CreateContest />} />
 
-
-
+        {/* Other */}
         <Route path="/interviews" element={<InterviewList />} />
         <Route path="/interview-details" element={<InterviewDetails />} />
-
         <Route path="/profile" element={<Profile />} />
         <Route path="/resume-manager" element={<ResumeManager />} />
         <Route path="/practice-hr" element={<HRPractice />} />
-
-        {/* Optional results page */}
-        {/* <Route path="/results" element={<ResultPage />} /> */}
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
