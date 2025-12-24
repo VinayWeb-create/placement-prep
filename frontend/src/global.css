@@ -1981,3 +1981,147 @@ textarea:focus {
     align-items: stretch;
   }
 }
+
+
+/* ==============================
+   CREATE CONTEST (ADMIN PAGE)
+   ============================== */
+
+.create-contest-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+.create-contest-card {
+  width: 100%;
+  max-width: 620px;
+  background: #0f1629;
+  border-radius: 20px;
+  padding: 36px 34px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  animation: fadeUp 0.4s ease;
+}
+
+/* Admin Pill */
+.info-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: rgba(106,139,255,0.15);
+  color: #6a8bff;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* Titles */
+.create-contest-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.create-contest-subtitle {
+  font-size: 14px;
+  color: #9aa3b9;
+  margin-bottom: 28px;
+}
+
+/* Form Layout */
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.create-form label {
+  display: block;
+  font-size: 13px;
+  color: #9aa3b9;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.create-form input,
+.create-form textarea {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 14px;
+}
+
+.create-form input::placeholder,
+.create-form textarea::placeholder {
+  color: #8c95ac;
+}
+
+.create-form input:focus,
+.create-form textarea:focus {
+  border-color: #6a8bff;
+  outline: none;
+}
+
+/* Textarea */
+.create-form textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Two Column Row */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Actions */
+.create-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* Buttons already exist globally:
+   .btn-grad
+   .btn-dark
+*/
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .create-contest-card {
+    padding: 28px 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .create-actions {
+    flex-direction: column-reverse;
+  }
+
+  .create-actions button {
+    width: 100%;
+  }
+}
+
+/* Subtle animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
