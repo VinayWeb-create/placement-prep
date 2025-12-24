@@ -4,17 +4,13 @@ const router = express.Router();
 const Contest = require("../models/Contest");
 const Problem = require("../models/Problem");
 const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 /* ======================================
    CREATE CONTEST (ADMIN ONLY)
 ====================================== */
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, admin, async (req, res) => {
   try {
-    // 🔐 Admin check (simple version)
-    if (req.user.role !== "admin") {
-      return res.status(403).json({ message: "Admin access required" });
-    }
-
     const { title, duration, startTime } = req.body;
 
     if (!title || !duration || !startTime) {
@@ -42,7 +38,7 @@ router.get("/", async (req, res) => {
   try {
     const contests = await Contest.find().sort({ createdAt: -1 });
     res.json(contests);
-  } catch (err) {
+  } catch {
     res.status(500).json({ message: "Failed to load contests" });
   }
 });
@@ -57,7 +53,7 @@ router.get("/:id/problems", auth, async (req, res) => {
     });
 
     res.json(problems);
-  } catch (err) {
+  } catch {
     res.status(500).json({ message: "Failed to load problems" });
   }
 });
