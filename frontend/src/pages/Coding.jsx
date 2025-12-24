@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Coding() {
   const navigate = useNavigate();
+  const [level, setLevel] = useState("easy");
 
   return (
     <>
-      {/* ======== SIDEBAR ======== */}
+      {/* ======== SIDEBAR (unchanged) ======== */}
       <div className="sidebar">
         <h2 className="sidebar-logo">PrepPortal</h2>
 
         <div className="sidebar-section">
-
           <div className="sidebar-item" onClick={() => navigate("/dashboard")}>
             🏠 Dashboard
           </div>
@@ -19,33 +20,14 @@ export default function Coding() {
             📁 Interviews
           </div>
 
-          {/* Practice Main Parent */}
           <div className="sidebar-item" onClick={() => navigate("/practice")}>
-          🧠 Practice
-        </div>
+            🧠 Practice
+          </div>
 
-          {/* Practice Submenu */}
           <div className="submenu">
-            <div
-              className="sidebar-subitem"
-              onClick={() => navigate("/aptitude")}
-            >
-              📘 Aptitude
-            </div>
-
-            <div
-              className="sidebar-subitem active-sub"
-              onClick={() => navigate("/coding")}
-            >
-              💻 Coding
-            </div>
-
-            <div
-              className="sidebar-subitem"
-              onClick={() => navigate("/practice-hr")}
-            >
-              🎤 HR / Behavioral
-            </div>
+            <div className="sidebar-subitem">📘 Aptitude</div>
+            <div className="sidebar-subitem active-sub">💻 Coding</div>
+            <div className="sidebar-subitem">🎤 HR / Behavioral</div>
           </div>
 
           <div className="sidebar-item" onClick={() => navigate("/profile")}>
@@ -56,53 +38,61 @@ export default function Coding() {
 
       {/* ======== MAIN CONTENT ======== */}
       <div className="dashboard-main">
-
-        {/* Page Title */}
-        <h1 className="page-title">Coding Practice</h1>
+        <h1 className="page-title">Coding Section</h1>
         <p className="page-subtitle">
-          Choose a difficulty level to start solving coding challenges.
+          Practice coding or participate in live contests.
         </p>
 
-        {/* ===== Cards Grid ===== */}
         <div className="practice-grid">
 
-          {/* EASY */}
-          <div
-            className="practice-card"
-            onClick={() => navigate("/coding-editor")}
-          >
-            <h2 className="practice-title">Easy</h2>
+          {/* ================= PRACTICE MODE ================= */}
+          <div className="practice-card">
+            <h2 className="practice-title">🧠 Practice Mode</h2>
             <p className="practice-desc">
-              Simple coding challenges to build your foundation.
+              Improve your coding skills by difficulty level.
             </p>
 
-            <button className="practice-btn">Start Coding →</button>
+            {/* Difficulty Selector */}
+            <select
+              className="difficulty-select"
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+            >
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+
+            <button
+              className="practice-btn"
+              onClick={() => navigate(`/coding-editor?level=${level}`)}
+            >
+              Start Practice →
+            </button>
           </div>
 
-          {/* MEDIUM */}
-          <div
-            className="practice-card"
-            onClick={() => navigate("/coding-editor")}
-          >
-            <h2 className="practice-title">Medium</h2>
+          {/* ================= CONTEST MODE ================= */}
+          <div className="practice-card contest-card">
+            <h2 className="practice-title">🏆 Contest Mode</h2>
             <p className="practice-desc">
-              Intermediate problems commonly asked in interviews.
+              Participate in real-time coding contests or create one.
             </p>
 
-            <button className="practice-btn">Start Coding →</button>
-          </div>
+            <div className="contest-actions">
+              <button
+                className="practice-btn"
+                onClick={() => navigate("/coding-contests")}
+              >
+                View Contests →
+              </button>
 
-          {/* HARD */}
-          <div
-            className="practice-card"
-            onClick={() => navigate("/coding-editor")}
-          >
-            <h2 className="practice-title">Hard</h2>
-            <p className="practice-desc">
-              Advanced algorithm challenges for DSA mastery.
-            </p>
-
-            <button className="practice-btn">Start Coding →</button>
+              <button
+                className="btn-dark"
+                onClick={() => navigate("/admin/create-contest")}
+              >
+                Create Contest +
+              </button>
+            </div>
           </div>
 
         </div>
