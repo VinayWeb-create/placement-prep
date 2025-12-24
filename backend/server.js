@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const contestRoutes = require("./routes/contestRoutes");
+
 const authRoutes = require("./routes/authRoutes");
+const contestRoutes = require("./routes/contestRoutes");
+const problemRoutes = require("./routes/problemRoutes");
 
 const app = express();
 
-/* ---------- CORS (Vercel + Local) ---------- */
+/* ---------- CORS ---------- */
 app.use(
   cors({
     origin: [
@@ -15,6 +17,7 @@ app.use(
       "https://placement-prep-jade.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
@@ -23,13 +26,13 @@ app.use(express.json());
 /* ---------- ROUTES ---------- */
 app.use("/api/auth", authRoutes);
 app.use("/api/contests", contestRoutes);
-app.use("/api/problems", require("./routes/problemRoutes"));
+app.use("/api/problems", problemRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend Running Successfully 🚀");
 });
 
-/* ---------- MONGO (NO OPTIONS, PERIOD) ---------- */
+/* ---------- MONGO ---------- */
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("🔥 MongoDB Connected Successfully"))
