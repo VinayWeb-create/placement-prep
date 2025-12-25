@@ -1,25 +1,26 @@
-/* ============================================================
-   GLOBAL RESET & THEME
-============================================================ */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+/* ===========================================================================
+    GLOBAL THEME + RESET
+=========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-main: #0a0f1f;
+  --bg-dark: #0A0F1F;
+  --bg-sidebar: #111418;
   --bg-card: #111827;
-  --bg-soft: #1b2337;
-  --border: rgba(255,255,255,0.08);
+  --bg-card2: #1A1F27;
 
-  --primary: #6366f1;
-  --accent: #ff6a88;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --warning: #eab308;
+  --text-white: #ffffff;
+  --text-dim: #a6b0c3;
 
-  --text-main: #ffffff;
-  --text-muted: #9aa3b9;
+  --border-light: rgba(255,255,255,0.08);
+
+  --grad-1: #ff6a88;
+  --grad-2: #ff99ac;
+  --grad-3: #6a8bff;
 
   --radius: 14px;
-  --shadow: 0 8px 30px rgba(0,0,0,0.35);
+  --radius-lg: 20px;
+  --shadow: 0 6px 30px rgba(0,0,0,0.28);
 }
 
 * {
@@ -30,68 +31,447 @@
 }
 
 body {
-  background: var(--bg-main);
-  color: var(--text-main);
+  background: var(--bg-dark);
+  color: var(--text-white);
   overflow-x: hidden;
 }
 
-/* ============================================================
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* ===========================================================================
+    SIDEBAR (GLOBAL FOR ALL PAGES)
+=========================================================================== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--bg-sidebar);
+  padding: 28px 22px;
+  border-right: 1px solid var(--border-light);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.sidebar-sub {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 30px;
+}
+
+.sidebar-item {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+.logout {
+  color: #ff6a6a !important;
+}
+
+/* Submenu */
+.submenu {
+  margin-left: 18px;
+  margin-bottom: 14px;
+}
+
+.sidebar-subitem {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.sidebar-subitem:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+/* ===========================================================================
+    MAIN CONTENT AREA
+=========================================================================== */
+.dashboard-main,
+.content {
+  margin-left: 260px;
+  padding: 40px 50px;
+  min-height: 100vh;
+  width: calc(100% - 260px);
+}
+
+.page-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* ===========================================================================
+    DASHBOARD CARDS
+=========================================================================== */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.card {
+  background: var(--bg-card2);
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow);
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-title {
+  font-size: 18px;
+  color: var(--text-dim);
+}
+
+.card-number {
+  font-size: 34px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+/* ===========================================================================
+    INTERVIEW LIST CARD
+=========================================================================== */
+.interview-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px;
+  background: #1A1D25;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+/* ===========================================================================
+    ADD BUTTON (Gradient)
+=========================================================================== */
+.add-button {
+  width: 100%;
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-3));
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 25px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  filter: brightness(1.1);
+}
+
+/* ===========================================================================
+    PRACTICE PAGE CARDS (Aptitude / Coding / HR)
+=========================================================================== */
+.practice-card {
+  background: var(--bg-card2);
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.practice-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--grad-3);
+}
+
+.pill-box {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.pill {
+  padding: 8px 14px;
+  background: #1b2330;
+  border-radius: 40px;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.pill.active {
+  background: var(--grad-3);
+  color: #fff;
+}
+
+/* ===========================================================================
+    APTITUDE TEST (MCQ PAGE)
+=========================================================================== */
+.mcq-card {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  background: #111827;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+}
+
+.mcq-option {
+  padding: 14px;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  background: var(--bg-card2);
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+}
+
+.mcq-option:hover {
+  border-color: var(--grad-3);
+}
+
+.mcq-option.selected {
+  background: rgba(106,139,255,0.18);
+  border-color: var(--grad-3);
+}
+
+/* ===========================================================================
+    LOGIN PAGE (Perfect Figma UI)
+=========================================================================== */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #060b15;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 36px;
+  border-radius: 20px;
+  background: #0f1629;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+}
+
+.login-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #9aa2b5;
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 26px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 14px;
+}
+
+.input:focus {
+  border-color: var(--grad-3);
+  outline: none;
+}
+
+.btn-grad {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-3));
+  border: none;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-grad:hover {
+  filter: brightness(1.12);
+}
+
+/* ===========================================================================
+    REGISTER PAGE
+=========================================================================== */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #060b15;
+  padding: 20px;
+}
+
+.register-card {
+  max-width: 440px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 20px;
+  background: #0f1629;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+}
+
+.register-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 14px;
+}
+
+.register-input:focus {
+  border-color: var(--grad-3);
+  outline: none;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-3));
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  filter: brightness(1.12);
+}
+
+/* ===========================================================================
+    RESPONSIVE FIXES
+=========================================================================== */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .dashboard-main,
+  .content {
+    margin-left: 0;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================
+   LAYOUT WRAPPER
+========================== */
+.app-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #0A0F1F;
+  color: white;
+}
+
+/* ==========================
    SIDEBAR
-============================================================ */
+========================== */
 .sidebar {
   width: 260px;
+  background: #111418;
+  padding: 28px 22px;
+  border-right: 1px solid rgba(255,255,255,0.08);
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  background: #111418;
-  padding: 28px 22px;
-  border-right: 1px solid var(--border);
 }
 
 .sidebar-logo {
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 28px;
+  margin-bottom: 25px;
+}
+
+.sidebar-heading {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .sidebar-item {
   padding: 12px 14px;
   border-radius: 12px;
-  margin-bottom: 10px;
-  color: #cbd5e1;
+  color: #c9c9c9;
   cursor: pointer;
-  transition: 0.25s;
+  margin-bottom: 10px;
+  font-size: 15px;
 }
-
-.sidebar-item:hover,
-.sidebar-item.active {
+.sidebar-item:hover {
   background: rgba(255,255,255,0.08);
-  color: white;
+}
+.sidebar-item.active {
+  background: rgba(106,139,255,0.18);
+  border-left: 4px solid #6a8bff;
+  color: #ffffff;
+  padding-left: 18px;
 }
 
-/* ============================================================
-   MAIN LAYOUT
-============================================================ */
+/* ==========================
+   MAIN CONTENT
+========================== */
 .dashboard-main {
-  margin-left: 260px;
-  padding: 40px;
-  min-height: 100vh;
+  margin-left: 260px; 
+  padding: 40px 50px;
+  width: calc(100% - 260px);
 }
 
 .page-title {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .page-subtitle {
-  color: var(--text-muted);
+  color: #9aa3b9;
   margin-bottom: 30px;
 }
 
-/* ============================================================
-   CARD GRID
-============================================================ */
+/* ==========================
+   PRACTICE CARDS
+========================== */
 .practice-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -99,144 +479,958 @@ body {
 }
 
 .practice-card {
-  background: var(--bg-card);
-  padding: 26px;
+  background: #111827;
+  padding: 28px;
   border-radius: 18px;
-  border: 1px solid var(--border);
-  transition: 0.25s;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
 .practice-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
+  transform: translateY(-3px);
+  border-color: #6a8bff;
 }
 
 .practice-title {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .practice-desc {
-  color: var(--text-muted);
-  margin: 10px 0 18px;
+  color: #b3b7c3;
+  font-size: 15px;
+  margin-bottom: 22px;
 }
 
-/* ============================================================
-   BUTTONS
-============================================================ */
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  border: none;
-  padding: 12px 22px;
-  border-radius: 12px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  filter: brightness(1.1);
-}
-
-.btn-dark {
-  background: #1f2937;
-  border: none;
-  color: #e5e7eb;
-  padding: 12px 22px;
-  border-radius: 12px;
-}
-
-/* ============================================================
-   REGISTRATION FORM
-============================================================ */
-.register-wrapper {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.register-card {
-  background: #0b1220;
-  padding: 32px;
-  border-radius: 16px;
+.practice-btn {
   width: 100%;
-  max-width: 420px;
-  box-shadow: var(--shadow);
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
 }
 
-.register-title {
-  text-align: center;
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  .dashboard-main {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   APTITUDE TEST PAGE
+=============================== */
+
+.test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.test-counter {
+  font-size: 17px;
+  color: #b5b9c9;
+}
+
+.test-timer {
+  background: #1F2937;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #e3e6f3;
+}
+
+.test-card {
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 720px;
+  width: 100%;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.35);
+}
+
+.test-question {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
+  margin-bottom: 24px;
 }
 
-.register-subtitle {
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-
-.register-form {
+.option-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.register-form input {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #020617;
+.option {
+  padding: 14px 18px;
+  background: #1b2337;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.option:hover {
+  border-color: #6a8bff;
+}
+
+.option.selected {
+  background: rgba(106,139,255,0.25);
+  border-color: #6a8bff;
+}
+
+.test-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 26px;
+}
+
+.next-btn {
+  padding: 12px 26px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+/* Back Button */
+.back-btn {
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: #d1d6e5;
+  font-size: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.back-btn:hover {
+  background: #252d45;
+  border-color: #6a8bff;
   color: white;
 }
+/* ===============================
+   CODING EDITOR – CONTAINER
+   =============================== */
 
-.register-form input:focus {
-  border-color: var(--primary);
-}
-
-/* ============================================================
-   CODING EDITOR
-============================================================ */
 .editor-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 26px;
+  margin-top: 10px;
 }
+
+@media (max-width: 900px) {
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   EDITOR CARD (Left + Right)
+   =============================== */
+
+.editor-card {
+  background: #111827;
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+}
+
+.editor-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.editor-desc {
+  color: #9aa3b9;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* ===============================
+   INPUT / OUTPUT BOXES
+   =============================== */
+
+.io-box {
+  margin-bottom: 18px;
+}
+
+.io-label {
+  color: #9aa3b9;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.io-value {
+  background: #1b2337;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.io-value.blue {
+  color: #6a8bff;
+}
+
+.io-value.green {
+  color: #74ff9d;
+}
+
+/* ===============================
+   CODE EDITOR AREA
+   =============================== */
 
 .code-editor {
-  background: #1f2937;
-  border-radius: 12px;
-  padding: 16px;
+  width: 100%;
   height: 280px;
-  color: white;
-  font-family: monospace;
-  border: 1px solid var(--border);
+  background: #1b2337;
+  color: #e3e3e3;
+  padding: 18px;
+  font-size: 14px;
+  border-radius: 14px;
+  font-family: "Fira Code", monospace;
+  border: 1px solid rgba(255,255,255,0.12);
+  resize: none;
 }
 
+.code-editor:focus {
+  border-color: #6a8bff;
+  outline: none;
+  box-shadow: 0 0 12px rgba(106, 139, 255, 0.35);
+}
+
+/* ===============================
+   BUTTONS (Run / Submit)
+   =============================== */
+
 .editor-btns {
-  margin-top: 16px;
   display: flex;
   gap: 12px;
+  margin-top: 18px;
+}
+
+/* Run Code */
+.run-btn {
+  padding: 12px 24px;
+  background: #ffd75c;
+  color: #000;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s;
+}
+
+.run-btn:hover {
+  background: #ffcc3b;
+}
+
+/* Submit */
+.submit-btn {
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #ff6a88, #6a8bff);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.submit-btn:hover {
+  filter: brightness(1.2);
+}
+
+/* ===============================
+   OUTPUT SECTION
+   =============================== */
+
+.output-card {
+  margin-top: 32px;
+  background: #111827;
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+}
+
+.output-box {
+  background: #1b2337;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  height: 120px;
+  color: #d1d5db;
+}
+
+.output-placeholder {
+  color: #7a869b;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* ===============================
+   BACK BUTTON
+   =============================== */
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 22px;
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #9aa3b9;
+  transition: 0.25s ease;
+}
+
+.back-btn:hover {
+  background: #222b3e;
+  color: #fff;
+}
+/* ============================================================
+   GLOBAL THEME + RESET
+   ============================================================*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #060b15;
+  --bg-sidebar: #111418;
+  --bg-card: #0f1629;
+  --bg-card-light: #1b2337;
+
+  --text-white: #ffffff;
+  --text-light: #cfcfcf;
+  --text-dim: #9aa3b9;
+
+  --border-light: rgba(255,255,255,0.08);
+
+  --grad-1: #ff6a88;
+  --grad-2: #ff99ac;
+  --grad-3: #6a8bff;
+
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  --shadow-soft: 0 8px 40px rgba(0,0,0,0.35);
+  --shadow-card: 0 6px 25px rgba(0,0,0,0.25);
+
+  --menu-speed: 0.35s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-white);
 }
 
 /* ============================================================
-   STATUS PILLS
-============================================================ */
-.status-pill {
-  padding: 6px 14px;
+   SIDEBAR (Desktop + Mobile)
+   ============================================================*/
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-light);
+  padding: 28px 22px;
+  transition: transform var(--menu-speed) ease;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Sidebar Items */
+.sidebar-item {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* Submenu */
+.submenu {
+  margin-left: 18px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-subitem {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  color: var(--text-dim);
+}
+
+.sidebar-subitem:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.active-sub {
+  background: rgba(255,255,255,0.15);
+  color: #fff !important;
+}
+
+/* Mobile Sidebar */
+.sidebar-closed {
+  transform: translateX(-270px);
+}
+
+.sidebar-toggle-btn {
+  display: none;
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  background: #1b2337;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+@media(max-width: 900px) {
+  .sidebar {
+    transform: translateX(-270px);
+  }
+  .sidebar-open {
+    transform: translateX(0);
+  }
+  .sidebar-toggle-btn {
+    display: block;
+  }
+}
+
+/* ============================================================
+   DASHBOARD MAIN CONTENT
+   ============================================================*/
+.dashboard-main {
+  margin-left: 260px;
+  padding: 40px 50px;
+  min-height: 100vh;
+  transition: margin var(--menu-speed);
+}
+
+@media(max-width: 900px) {
+  .dashboard-main {
+    margin-left: 0;
+    padding: 25px;
+  }
+}
+
+.page-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  color: var(--text-dim);
+  margin-bottom: 30px;
+}
+
+/* ============================================================
+   PRACTICE CARDS (Aptitude + Coding + HR)
+   ============================================================*/
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 26px;
+}
+
+@media(max-width: 900px) {
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.practice-card {
+  background: var(--bg-card);
+  padding: 26px;
   border-radius: 20px;
-  font-size: 13px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.practice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.practice-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.practice-desc {
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.practice-btn {
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-3));
+  color: #fff;
+  transition: 0.25s;
+}
+
+.practice-btn:hover {
+  filter: brightness(1.15);
+}
+
+/* ============================================================
+   CODING EDITOR PAGE
+   ============================================================*/
+.code-editor-wrapper {
+  background: var(--bg-card);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.editor-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.editor-textarea {
+  width: 100%;
+  height: 260px;
+  background: var(--bg-card-light);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 14px;
+  color: white;
+  border-radius: 14px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.editor-btn-row {
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+}
+
+.editor-run {
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: #ffd447;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+}
+
+.editor-submit {
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--grad-3);
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ============================================================
+   HR PRACTICE PAGE
+   ============================================================*/
+.hr-card {
+  background: var(--bg-card);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 20px;
+}
+
+.hr-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hr-desc {
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.hr-btn {
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-3));
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
   font-weight: 600;
 }
 
-.success { background: rgba(34,197,94,0.15); color: #22c55e; }
-.pending { background: rgba(234,179,8,0.15); color: #eab308; }
-.fail { background: rgba(239,68,68,0.15); color: #ef4444; }
 
 /* ============================================================
-   RESPONSIVE
+   GLOBAL RESET + THEME
 ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #0A0F1F;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2639;
+  border-radius: 20px;
+}
+
+/* ============================================================
+   SIDEBAR (Premium UI)
+============================================================ */
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #111418;
+  padding: 28px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.sidebar-item {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  color: #b9bfcf;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.sidebar-item.active {
+  background: linear-gradient(90deg, #ff6a88, #ff99ac, #6a8bff);
+  color: #fff;
+  font-weight: 600;
+}
+
+.logout-button {
+  margin-top: auto;
+  background: #2a3140;
+  text-align: center;
+}
+.logout-button:hover {
+  background: #3c465a;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+============================================================ */
+
+.dashboard-main {
+  margin-left: 250px;
+  padding: 40px 45px;
+  min-height: 100vh;
+}
+
+/* Titles */
+.page-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: #8b94a9;
+  margin-bottom: 32px;
+}
+
+/* ============================================================
+   STAT CARDS – Premium
+============================================================ */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: #111827;
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 22px rgba(0,0,0,0.25);
+  transition: 0.25s ease;
+}
+
+.stat-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #9aa3b9;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.stat-footer {
+  color: #788399;
+  font-size: 13px;
+}
+
+/* ============================================================
+   INTERVIEW CARDS
+============================================================ */
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 20px 0 16px;
+}
+
+.interview-card {
+  background: #141922;
+  padding: 22px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.25s;
+}
+
+.interview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.interview-role {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.interview-company {
+  color: #aeb6c7;
+  margin-top: 4px;
+}
+
+.interview-status {
+  text-align: right;
+}
+
+.stat-success {
+  color: #00d26a;
+  font-weight: 600;
+}
+
+.stat-fail {
+  color: #ff4b4b;
+  font-weight: 600;
+}
+
+.stat-pending {
+  color: #d4b400;
+  font-weight: 600;
+}
+
+/* Add Interview Button */
+.add-button {
+  width: 100%;
+  padding: 18px;
+  margin-top: 20px;
+  border-radius: 18px;
+  font-size: 17px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff6a88, #6a8bff);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-button:hover {
+  filter: brightness(1.15);
+}
+
+/* ============================================================
+   PRACTICE CARDS (Aptitude / Coding / HR)
+============================================================ */
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.practice-card {
+  background: #111827;
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.practice-card:hover {
+  transform: translateY(-6px);
+  border-color: #6a8bff;
+}
+
+.practice-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.practice-desc {
+  font-size: 14px;
+  color: #97a0b5;
+  margin-bottom: 20px;
+}
+
+.practice-btn {
+  width: fit-content;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #ff6a88, #6a8bff);
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.practice-btn:hover {
+  filter: brightness(1.15);
+}
+
+/* ============================================================
+   CODING EDITOR PAGE
+============================================================ */
+
+.editor-box {
+  background: #111827;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+textarea.editor-input {
+  width: 100%;
+  height: 260px;
+  background: #1F2937;
+  padding: 14px;
+  color: #d1d7e6;
+  border-radius: 14px;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  font-family: 'Courier New', monospace;
+}
+
+textarea:focus {
+  border-color: #6a8bff;
+  outline: none;
+}
+
+.editor-run {
+  padding: 12px 22px;
+  background: #ffd054;
+  color: #000;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.editor-submit {
+  padding: 12px 22px;
+  background: #6a8bff;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ============================================================
+   RESPONSIVE FIXES
+============================================================ */
+
 @media (max-width: 900px) {
   .sidebar {
     display: none;
@@ -244,14 +1438,401 @@ body {
 
   .dashboard-main {
     margin-left: 0;
-    padding: 20px;
+    padding: 25px;
   }
 
+  .stat-grid,
   .practice-grid {
     grid-template-columns: 1fr;
   }
+}
+/* ================================
+   404 PAGE
+================================ */
 
-  .editor-grid {
+.notfound-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 120px;
+}
+
+.notfound-box {
+  text-align: center;
+  background: #111827;
+  padding: 50px 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+}
+
+.nf-title {
+  font-size: 90px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff6a88, #ff99ac, #6a8bff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.nf-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.nf-text {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #9ba3b8;
+  line-height: 1.6;
+}
+
+.nf-btn {
+  margin-top: 30px;
+  padding: 14px 22px;
+  background: linear-gradient(90deg, #ff6a88, #ff99ac, #6a8bff);
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.nf-btn:hover {
+  filter: brightness(1.2);
+}
+/* ================================
+   INTERVIEW PAGE (With Sidebar)
+   ================================ */
+
+/* Main content area (common across pages) */
+.dashboard-main {
+  margin-left: 260px;
+  padding: 40px;
+  min-height: 100vh;
+  background: #0A0F1F;
+}
+
+/* Page title */
+.page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  color: #9aa3b9;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+/* Interview Table Wrapper */
+.interview-table-card {
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+/* Table Styling */
+.interview-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+.interview-table thead {
+  background: #1A2333;
+}
+
+.interview-table th {
+  padding: 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #c9c9c9;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.interview-table tbody tr {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.interview-table td {
+  padding: 16px;
+  font-size: 15px;
+}
+
+.text-light {
+  color: #e2e3e5;
+}
+
+.text-dim {
+  color: #9aa3b9;
+}
+
+/* Status Pills */
+.status-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.success-pill {
+  background: rgba(0, 255, 120, 0.12);
+  color: #22ff8a;
+}
+
+.fail-pill {
+  background: rgba(255, 60, 60, 0.12);
+  color: #ff6060;
+}
+
+.pending-pill {
+  background: rgba(255, 200, 0, 0.15);
+  color: #ffd65f;
+}
+
+/* Table Button */
+.table-btn {
+  padding: 10px 16px;
+  background: #2563EB;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.25s;
+}
+
+.table-btn:hover {
+  background: #1D4ED8;
+}
+
+/* Sidebar Left Layout (common) */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background: #111418;
+  padding: 30px 22px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-logo {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-item {
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #c9c9c9;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.sidebar-item.active {
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+}
+
+/* Responsive Fix */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;  
+  }
+
+  .dashboard-main {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .interview-table-card {
+    border-radius: 12px;
+  }
+
+  .interview-table th,
+  .interview-table td {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+/* Back Button */
+.back-btn {
+  background: transparent;
+  color: #9aa3b9;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+.back-btn:hover {
+  color: #fff;
+}
+
+/* Main Detail Card */
+.detail-card {
+  background: #111827;
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Header */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-company {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.detail-role {
+  color: #9aa3b9;
+}
+
+.detail-date {
+  color: #9aa3b9;
+  margin-top: 10px;
+}
+
+.detail-divider {
+  border-color: rgba(255,255,255,0.08);
+  margin: 25px 0;
+}
+
+.detail-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Rounds */
+.detail-rounds {
+  display: grid;
+  gap: 16px;
+}
+
+.round-box {
+  background: #1F2937;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.round-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.round-text {
+  color: #bfc6d4;
+  margin-top: 4px;
+}
+
+/* Feedback */
+.detail-feedback {
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+/* ---------------- PROFILE PAGE ---------------- */
+
+.profile-card {
+  background: #111827;
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.25);
+  max-width: 900px;
+}
+
+.profile-heading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #9aa3b9;
+  font-size: 14px;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: white;
+  font-size: 15px;
+}
+
+.profile-input:focus {
+  border-color: #6a8bff;
+  outline: none;
+}
+
+.profile-save-btn {
+  margin-top: 25px;
+  padding: 14px 20px;
+  width: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ff6a88, #ff99ac, #6a8bff);
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+}
+
+.profile-save-btn:hover {
+  filter: brightness(1.15);
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
     grid-template-columns: 1fr;
   }
 }
