@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import API from "../../api/axios";
 
 export default function CodingEditor() {
   const { contestId } = useParams();
