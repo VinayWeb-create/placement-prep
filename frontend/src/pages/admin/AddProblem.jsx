@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 import API from "../../api/axios";
 
 export default function AddProblem() {
@@ -36,7 +36,7 @@ export default function AddProblem() {
         sampleTests: "",
       });
     } catch (err) {
-      alert("❌ Invalid JSON or server error");
+      alert("❌ Invalid JSON or Server Error");
     }
   };
 
@@ -44,15 +44,13 @@ export default function AddProblem() {
     <div className="admin-form">
       <h1>Add Problem</h1>
 
-      <input placeholder="Title" onChange={e => setProblem({...problem, title: e.target.value})} />
-      <textarea placeholder="Description" onChange={e => setProblem({...problem, description: e.target.value})} />
+      <input placeholder="Title" onChange={e => setProblem({ ...problem, title: e.target.value })} />
+      <textarea placeholder="Description" onChange={e => setProblem({ ...problem, description: e.target.value })} />
+      <input placeholder="Function Name" onChange={e => setProblem({ ...problem, functionName: e.target.value })} />
+      <textarea placeholder="Input Format" onChange={e => setProblem({ ...problem, inputFormat: e.target.value })} />
+      <textarea placeholder="Output Format" onChange={e => setProblem({ ...problem, outputFormat: e.target.value })} />
 
-      <input placeholder="Function Name" onChange={e => setProblem({...problem, functionName: e.target.value})} />
-
-      <textarea placeholder="Input Format" onChange={e => setProblem({...problem, inputFormat: e.target.value})} />
-      <textarea placeholder="Output Format" onChange={e => setProblem({...problem, outputFormat: e.target.value})} />
-
-      <select onChange={e => setProblem({...problem, difficulty: e.target.value})}>
+      <select onChange={e => setProblem({ ...problem, difficulty: e.target.value })}>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
@@ -60,7 +58,7 @@ export default function AddProblem() {
 
       <textarea
         placeholder='Sample Tests JSON [{"input":"5","output":"120"}]'
-        onChange={e => setProblem({...problem, sampleTests: e.target.value})}
+        onChange={e => setProblem({ ...problem, sampleTests: e.target.value })}
       />
 
       <button onClick={submitProblem}>Add Problem</button>
