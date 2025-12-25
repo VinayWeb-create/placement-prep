@@ -59,41 +59,51 @@ export default function ContestDetails() {
   }
 
   return (
-    <div className="dashboard-main">
-      <h1 className="page-title">{contest?.title}</h1>
-      <p className="page-subtitle">{contest?.description}</p>
+   <div className="register-wrapper">
+  <div className="register-card">
 
-      <div className="form-card">
-        <h3>Participant Registration</h3>
+    <h2 className="register-title">Participant Registration</h2>
+    <p className="register-subtitle">
+      Enter your details to start the contest
+    </p>
 
-        <input
-          placeholder="Full Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
+    <div className="register-form">
 
-        <input
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
+      <input
+        type="text"
+        placeholder="Full Name"
+        value={form.name}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
+      />
 
-        <input
-          placeholder="College"
-          value={form.college}
-          onChange={(e) => setForm({ ...form, college: e.target.value })}
-        />
+      <input
+        type="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+      />
 
-        <input
-          placeholder="Year (e.g. 3rd)"
-          value={form.year}
-          onChange={(e) => setForm({ ...form, year: e.target.value })}
-        />
+      <input
+        type="text"
+        placeholder="College"
+        value={form.college}
+        onChange={(e) => setForm({ ...form, college: e.target.value })}
+      />
 
-        <button className="btn-grad" onClick={register}>
-          Start Contest →
-        </button>
-      </div>
+      <input
+        type="text"
+        placeholder="Year (e.g. 3rd)"
+        value={form.year}
+        onChange={(e) => setForm({ ...form, year: e.target.value })}
+      />
+
+      <button className="register-btn" onClick={register}>
+        Start Contest →
+      </button>
+
     </div>
+  </div>
+</div>
+
   );
 }
