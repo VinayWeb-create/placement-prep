@@ -32,7 +32,7 @@ router.post("/", auth, admin, async (req, res) => {
 });
 
 /* ======================================
-   GET ALL CONTESTS (PUBLIC)
+   GET ALL CONTESTS
 ====================================== */
 router.get("/", async (req, res) => {
   try {
@@ -44,7 +44,24 @@ router.get("/", async (req, res) => {
 });
 
 /* ======================================
-   GET PROBLEMS FOR A CONTEST (AUTH)
+   GET SINGLE CONTEST (🔥 REQUIRED)
+====================================== */
+router.get("/:id", async (req, res) => {
+  try {
+    const contest = await Contest.findById(req.params.id);
+
+    if (!contest) {
+      return res.status(404).json({ message: "Contest not found" });
+    }
+
+    res.json(contest);
+  } catch (err) {
+    res.status(500).json({ message: "Invalid contest ID" });
+  }
+});
+
+/* ======================================
+   GET PROBLEMS FOR A CONTEST
 ====================================== */
 router.get("/:id/problems", auth, async (req, res) => {
   try {
