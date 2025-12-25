@@ -8,6 +8,7 @@ export default function ContestDetails() {
 
   const [contest, setContest] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
@@ -17,14 +18,14 @@ export default function ContestDetails() {
     year: "",
   });
 
-  // 🔹 Load contest info
+  // 🔹 Fetch contest details
   useEffect(() => {
     const fetchContest = async () => {
       try {
         const res = await API.get(`/contests/${contestId}`);
         setContest(res.data);
       } catch (err) {
-        setError("Contest not found");
+        setError("Contest not found or expired.");
       } finally {
         setLoading(false);
       }
@@ -40,6 +41,8 @@ export default function ContestDetails() {
     }
 
     try {
+      setSubmitting(true);
+
       await API.post("/participants/register", {
         contestId,
         ...form,
@@ -48,9 +51,9 @@ export default function ContestDetails() {
       alert("🎉 Registration Successful!");
       navigate(`/contest/${contestId}`);
     } catch (err) {
-      alert(
-        err.response?.data?.message || "Registration failed"
-      );
+      alert(err.response?.data?.message || "Registration failed");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -58,52 +61,59 @@ export default function ContestDetails() {
     return <div className="dashboard-main">Loading contest...</div>;
   }
 
+  if (error) {
+    return <div className="dashboard-main">{error}</div>;
+  }
+
   return (
-   <div className="register-wrapper">
-  <div className="register-card">
+    <div className="register-wrapper">
+      <div className="register-card">
 
-    <h2 className="register-title">Participant Registration</h2>
-    <p className="register-subtitle">
-      Enter your details to start the contest
-    </p>
+        <h2 className="register-title">Participant Registration</h2>
+        <p className="register-subtitle">
+          Join <b>{contest?.title}</b> and start coding 🚀
+        </p>
 
-    <div className="register-form">
+        <div className="register-form">
 
-      <input
-        type="text"
-        placeholder="Full Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      />
+          <input
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
 
-      <input
-        type="text"
-        placeholder="College"
-        value={form.college}
-        onChange={(e) => setForm({ ...form, college: e.target.value })}
-      />
+          <input
+            type="text"
+            placeholder="College"
+            value={form.college}
+            onChange={(e) => setForm({ ...form, college: e.target.value })}
+          />
 
-      <input
-        type="text"
-        placeholder="Year (e.g. 3rd)"
-        value={form.year}
-        onChange={(e) => setForm({ ...form, year: e.target.value })}
-      />
+          <input
+            type="text"
+            placeholder="Year (e.g. 3rd)"
+            value={form.year}
+            onChange={(e) => setForm({ ...form, year: e.target.value })}
+          />
 
-      <button className="register-btn" onClick={register}>
-        Start Contest →
-      </button>
+          <button
+            className="register-btn"
+            onClick={register}
+            disabled={submitting}
+          >
+            {submitting ? "Registering..." : "Start Contest →"}
+          </button>
 
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
   );
 }
