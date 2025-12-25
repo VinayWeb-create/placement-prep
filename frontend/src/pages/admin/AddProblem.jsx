@@ -9,8 +9,10 @@ export default function AddProblem() {
     title: "",
     description: "",
     functionName: "",
+    inputFormat: "",
+    outputFormat: "",
     difficulty: "easy",
-    testCases: "",
+    sampleTests: "",
   });
 
   const submitProblem = async () => {
@@ -18,21 +20,23 @@ export default function AddProblem() {
       const payload = {
         ...problem,
         contestId,
-        testCases: JSON.parse(problem.testCases),
+        sampleTests: JSON.parse(problem.sampleTests),
       };
 
       await API.post("/problems", payload);
+      alert("✅ Problem added successfully");
 
-      alert("✅ Problem added successfully!");
       setProblem({
         title: "",
         description: "",
         functionName: "",
+        inputFormat: "",
+        outputFormat: "",
         difficulty: "easy",
-        testCases: "",
+        sampleTests: "",
       });
     } catch (err) {
-      alert("❌ Invalid test cases or server error");
+      alert("❌ Invalid JSON or server error");
     }
   };
 
@@ -40,43 +44,23 @@ export default function AddProblem() {
     <div className="admin-form">
       <h1>Add Problem</h1>
 
-      <input
-        placeholder="Problem Title"
-        value={problem.title}
-        onChange={(e) => setProblem({ ...problem, title: e.target.value })}
-      />
+      <input placeholder="Title" onChange={e => setProblem({...problem, title: e.target.value})} />
+      <textarea placeholder="Description" onChange={e => setProblem({...problem, description: e.target.value})} />
 
-      <textarea
-        placeholder="Problem Description"
-        value={problem.description}
-        onChange={(e) => setProblem({ ...problem, description: e.target.value })}
-      />
+      <input placeholder="Function Name" onChange={e => setProblem({...problem, functionName: e.target.value})} />
 
-      <input
-        placeholder="Function Name (e.g. reverseString)"
-        value={problem.functionName}
-        onChange={(e) =>
-          setProblem({ ...problem, functionName: e.target.value })
-        }
-      />
+      <textarea placeholder="Input Format" onChange={e => setProblem({...problem, inputFormat: e.target.value})} />
+      <textarea placeholder="Output Format" onChange={e => setProblem({...problem, outputFormat: e.target.value})} />
 
-      <select
-        value={problem.difficulty}
-        onChange={(e) =>
-          setProblem({ ...problem, difficulty: e.target.value })
-        }
-      >
+      <select onChange={e => setProblem({...problem, difficulty: e.target.value})}>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
 
       <textarea
-        placeholder='Test cases JSON: [{"input":"hello","output":"olleh"}]'
-        value={problem.testCases}
-        onChange={(e) =>
-          setProblem({ ...problem, testCases: e.target.value })
-        }
+        placeholder='Sample Tests JSON [{"input":"5","output":"120"}]'
+        onChange={e => setProblem({...problem, sampleTests: e.target.value})}
       />
 
       <button onClick={submitProblem}>Add Problem</button>
