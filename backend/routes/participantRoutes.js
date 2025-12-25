@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Participant = require("../models/Participant");
+const Participant = require("../models/Registration");
 const auth = require("../middleware/auth");
 
 // REGISTER FOR CONTEST
