@@ -20,7 +20,7 @@ import ResumeManager from "./pages/ResumeManager";
 /* ===== Contest System ===== */
 import CodingContests from "./pages/coding/CodingContests";
 import Leaderboard from "./pages/Leaderboard";
-
+import ContestDetails from "./pages/contest/ContestDetails";
 /* ===== Admin ===== */
 import CreateContest from "./pages/admin/CreateContest";
 
@@ -60,6 +60,11 @@ export default function App() {
         <Route path="/coding" element={<Coding />} />
         <Route path="/coding-editor" element={<CodingEditor />} />
         <Route path="/coding-contests" element={<CodingContests />} />
+        <Route
+  path="/contest/:contestId"
+  element={<ContestDetails />}
+/>
+
 
         {/* ================= CONTEST FLOW (CRITICAL) ================= */}
         <Route path="/contest/:contestId" element={<CodingEditor />} />
