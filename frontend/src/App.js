@@ -65,7 +65,7 @@ export default function App() {
   path="/contest/:contestId"
   element={<ContestDetails />}
 />
-<Route path="/admin/add-problem/:contestId" element={<AddProblem />} />
+
 
 
         {/* ================= CONTEST FLOW (CRITICAL) ================= */}
@@ -76,7 +76,9 @@ export default function App() {
         />
 
         {/* ================= ADMIN ================= */}
-        <Route path="/admin/create-contest" element={<CreateContest />} />
+       <Route path="/admin/create-contest" element={<CreateContest />} />
+<Route path="/admin/contest/:contestId/problems" element={<AddProblem />} />
+
 
         {/* ================= OTHER ================= */}
         <Route path="/interviews" element={<InterviewList />} />
