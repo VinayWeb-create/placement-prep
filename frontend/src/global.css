@@ -1836,3 +1836,258 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ================================
+   CODING CONTEST LIST PAGE
+================================ */
+
+.contest-page {
+  padding: 40px;
+}
+
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.practice-card {
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 24px;
+  transition: 0.25s;
+}
+
+.practice-card:hover {
+  transform: translateY(-4px);
+  border-color: #6366f1;
+}
+
+.practice-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.practice-desc {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 14px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.success-pill {
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+}
+
+.pending-pill {
+  background: rgba(250,204,21,0.15);
+  color: #facc15;
+}
+
+.fail-pill {
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+}
+
+.practice-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.practice-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ================================
+   CREATE CONTEST PAGE
+================================ */
+
+.create-contest-container {
+  max-width: 650px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.create-contest-card {
+  background: #0f172a;
+  border-radius: 18px;
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.create-contest-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.create-contest-subtitle {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 24px;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-form label {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.create-form input,
+.create-form textarea {
+  background: #1b2337;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+}
+
+.create-form input:focus,
+.create-form textarea:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.create-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-dark {
+  background: #1f2937;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.btn-grad {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ================================
+   CONTEST REGISTRATION PAGE
+================================ */
+
+.register-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b1020;
+  padding: 20px;
+}
+
+.register-card {
+  background: #0f172a;
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.register-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.register-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-form input {
+  padding: 12px;
+  border-radius: 10px;
+  background: #020617;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: white;
+}
+
+.register-form input:focus {
+  border-color: #6366f1;
+}
+
+.register-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
