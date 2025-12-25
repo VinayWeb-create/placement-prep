@@ -2125,3 +2125,155 @@ textarea:focus {
     transform: translateY(0);
   }
 }
+
+/* ============================= */
+/* CONTEST REGISTRATION PAGE */
+/* ============================= */
+
+.create-contest-container,
+.dashboard-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: #0f172a;
+}
+
+.create-contest-card {
+  background: #111827;
+  border-radius: 14px;
+  padding: 35px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+  animation: fadeIn 0.4s ease;
+}
+
+.create-contest-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.create-contest-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.info-pill {
+  display: inline-block;
+  background: #1e293b;
+  color: #38bdf8;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+/* ============================= */
+/* FORM ELEMENTS */
+/* ============================= */
+
+.create-form label {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.create-form input,
+.create-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #1f2933;
+  background: #020617;
+  color: #e5e7eb;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.create-form input:focus,
+.create-form textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px #38bdf8;
+}
+
+.create-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+.create-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-dark {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  background: #1f2933;
+  color: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-dark:hover {
+  background: #2b3646;
+}
+
+.btn-grad {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  transition: 0.25s;
+}
+
+.btn-grad:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* ============================= */
+/* ERROR MESSAGE */
+/* ============================= */
+
+.error-text {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* ============================= */
+/* ANIMATION */
+/* ============================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
