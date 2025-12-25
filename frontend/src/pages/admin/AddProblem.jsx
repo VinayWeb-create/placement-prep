@@ -1,69 +1,83 @@
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import API from "../../api/axios";
 
-export default function AddProblem({ contestId }) {
+export default function AddProblem() {
+  const { contestId } = useParams();
+
   const [problem, setProblem] = useState({
     title: "",
+    slug: "",
     description: "",
-    functionName: "",
+    problemStatement: "",
+    inputFormat: "",
+    outputFormat: "",
+    constraints: "",
     difficulty: "easy",
-    testCases: "",
+    functionName: "",
+    sampleTests: "",
+    hiddenTests: ""
   });
 
-  const submitProblem = async () => {
-    const payload = {
-      ...problem,
-      contestId,
-      testCases: JSON.parse(problem.testCases),
-    };
+  const handleChange = (e) => {
+    setProblem({ ...problem, [e.target.name]: e.target.value });
+  };
 
-    await API.post("/problems", payload);
-    alert("Problem added successfully!");
+  const submitProblem = async () => {
+    try {
+      await API.post("/problems", {
+        ...problem,
+        contestId,
+        sampleTests: JSON.parse(problem.sampleTests),
+        hiddenTests: JSON.parse(problem.hiddenTests),
+      });
+
+      alert("✅ Problem Added Successfully");
+    } catch (err) {
+      alert("❌ Failed to add problem");
+    }
   };
 
   return (
-    <div className="admin-form">
-      <h1>Add Problem</h1>
+    <div className="dashboard-main">
+      <div className="create-contest-card">
 
-      <input
-        placeholder="Title"
-        onChange={(e) =>
-          setProblem({ ...problem, title: e.target.value })
-        }
-      />
+        <h2>Create Coding Problem</h2>
 
-      <textarea
-        placeholder="Problem Description"
-        onChange={(e) =>
-          setProblem({ ...problem, description: e.target.value })
-        }
-      />
+        <input name="title" placeholder="Problem Title" onChange={handleChange} />
+        <input name="slug" placeholder="problem-slug" onChange={handleChange} />
 
-      <input
-        placeholder="Function Name (e.g. reverseString)"
-        onChange={(e) =>
-          setProblem({ ...problem, functionName: e.target.value })
-        }
-      />
+        <textarea name="description" placeholder="Short Description" onChange={handleChange} />
 
-      <select
-        onChange={(e) =>
-          setProblem({ ...problem, difficulty: e.target.value })
-        }
-      >
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-      </select>
+        <textarea name="problemStatement" placeholder="Problem Statement" onChange={handleChange} />
 
-      <textarea
-        placeholder='Test cases JSON: [{"input":"hello","output":"olleh"}]'
-        onChange={(e) =>
-          setProblem({ ...problem, testCases: e.target.value })
-        }
-      />
+        <textarea name="inputFormat" placeholder="Input Format" onChange={handleChange} />
+        <textarea name="outputFormat" placeholder="Output Format" onChange={handleChange} />
+        <textarea name="constraints" placeholder="Constraints" onChange={handleChange} />
 
-      <button onClick={submitProblem}>Add Problem</button>
+        <input name="functionName" placeholder="Function Name (solve)" onChange={handleChange} />
+
+        <select name="difficulty" onChange={handleChange}>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+        <textarea
+          name="sampleTests"
+          placeholder='Sample Tests JSON: [{"input":"123","output":"6"}]'
+          onChange={handleChange}
+        />
+
+        <textarea
+          name="hiddenTests"
+          placeholder='Hidden Tests JSON'
+          onChange={handleChange}
+        />
+
+        <button onClick={submitProblem}>Add Problem</button>
+
+      </div>
     </div>
   );
 }
