@@ -8,14 +8,12 @@ const problemSchema = new mongoose.Schema({
   },
 
   title: { type: String, required: true },
-  slug: { type: String, unique: true },
+  description: { type: String, required: true },
 
-  description: String,
-  problemStatement: String,
+  functionName: { type: String, required: true },
 
   inputFormat: String,
   outputFormat: String,
-  constraints: String,
 
   difficulty: {
     type: String,
@@ -23,26 +21,24 @@ const problemSchema = new mongoose.Schema({
     default: "easy",
   },
 
-  functionName: String,
-
   sampleTests: [
     {
       input: String,
       output: String,
-    }
+    },
   ],
 
   hiddenTests: [
     {
       input: String,
       output: String,
-    }
+    },
   ],
 
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 module.exports = mongoose.model("Problem", problemSchema);
