@@ -64,6 +64,7 @@ export default function App() {
   path="/contest/:contestId"
   element={<ContestDetails />}
 />
+<Route path="/admin/add-problem/:contestId" element={<AddProblem />} />
 
 
         {/* ================= CONTEST FLOW (CRITICAL) ================= */}
