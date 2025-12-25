@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import API from "../api/axios";
+import API from "../../api/axios";
+
 
 export default function AddProblem() {
   const { contestId } = useParams();
