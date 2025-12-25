@@ -86,12 +86,7 @@ export default function Coding() {
                 View Contests →
               </button>
 
-              <button
-                className="btn-dark"
-                onClick={() => navigate("/admin/create-contest")}
-              >
-                Create Contest +
-              </button>
+              
             </div>
           </div>
 
