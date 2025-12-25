@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import API from "../../api/axios";
 
 export default function AddProblem() {
@@ -7,77 +7,79 @@ export default function AddProblem() {
 
   const [problem, setProblem] = useState({
     title: "",
-    slug: "",
     description: "",
-    problemStatement: "",
-    inputFormat: "",
-    outputFormat: "",
-    constraints: "",
-    difficulty: "easy",
     functionName: "",
-    sampleTests: "",
-    hiddenTests: ""
+    difficulty: "easy",
+    testCases: "",
   });
-
-  const handleChange = (e) => {
-    setProblem({ ...problem, [e.target.name]: e.target.value });
-  };
 
   const submitProblem = async () => {
     try {
-      await API.post("/problems", {
+      const payload = {
         ...problem,
         contestId,
-        sampleTests: JSON.parse(problem.sampleTests),
-        hiddenTests: JSON.parse(problem.hiddenTests),
-      });
+        testCases: JSON.parse(problem.testCases),
+      };
 
-      alert("✅ Problem Added Successfully");
+      await API.post("/problems", payload);
+
+      alert("✅ Problem added successfully!");
+      setProblem({
+        title: "",
+        description: "",
+        functionName: "",
+        difficulty: "easy",
+        testCases: "",
+      });
     } catch (err) {
-      alert("❌ Failed to add problem");
+      alert("❌ Invalid test cases or server error");
     }
   };
 
   return (
-    <div className="dashboard-main">
-      <div className="create-contest-card">
+    <div className="admin-form">
+      <h1>Add Problem</h1>
 
-        <h2>Create Coding Problem</h2>
+      <input
+        placeholder="Problem Title"
+        value={problem.title}
+        onChange={(e) => setProblem({ ...problem, title: e.target.value })}
+      />
 
-        <input name="title" placeholder="Problem Title" onChange={handleChange} />
-        <input name="slug" placeholder="problem-slug" onChange={handleChange} />
+      <textarea
+        placeholder="Problem Description"
+        value={problem.description}
+        onChange={(e) => setProblem({ ...problem, description: e.target.value })}
+      />
 
-        <textarea name="description" placeholder="Short Description" onChange={handleChange} />
+      <input
+        placeholder="Function Name (e.g. reverseString)"
+        value={problem.functionName}
+        onChange={(e) =>
+          setProblem({ ...problem, functionName: e.target.value })
+        }
+      />
 
-        <textarea name="problemStatement" placeholder="Problem Statement" onChange={handleChange} />
+      <select
+        value={problem.difficulty}
+        onChange={(e) =>
+          setProblem({ ...problem, difficulty: e.target.value })
+        }
+      >
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
 
-        <textarea name="inputFormat" placeholder="Input Format" onChange={handleChange} />
-        <textarea name="outputFormat" placeholder="Output Format" onChange={handleChange} />
-        <textarea name="constraints" placeholder="Constraints" onChange={handleChange} />
+      <textarea
+        placeholder='Test cases JSON: [{"input":"hello","output":"olleh"}]'
+        value={problem.testCases}
+        onChange={(e) =>
+          setProblem({ ...problem, testCases: e.target.value })
+        }
+      />
 
-        <input name="functionName" placeholder="Function Name (solve)" onChange={handleChange} />
-
-        <select name="difficulty" onChange={handleChange}>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-
-        <textarea
-          name="sampleTests"
-          placeholder='Sample Tests JSON: [{"input":"123","output":"6"}]'
-          onChange={handleChange}
-        />
-
-        <textarea
-          name="hiddenTests"
-          placeholder='Hidden Tests JSON'
-          onChange={handleChange}
-        />
-
-        <button onClick={submitProblem}>Add Problem</button>
-
-      </div>
+      <button onClick={submitProblem}>Add Problem</button>
     </div>
   );
 }
