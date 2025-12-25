@@ -2384,3 +2384,91 @@ textarea:focus {
   font-size: 14px;
   margin-bottom: 15px;
 }
+
+
+/* ================= REGISTRATION PAGE ================= */
+
+.register-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  background: #0b1220;
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.register-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.register-subtitle {
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-form input {
+  background: #020617;
+  border: 1px solid #1f2933;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.register-form input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px #6366f1;
+}
+
+.register-btn {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.register-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* smooth animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
