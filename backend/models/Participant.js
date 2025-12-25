@@ -1,23 +1,49 @@
 const mongoose = require("mongoose");
 
-const registrationSchema = new mongoose.Schema({
-  contestId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Contest",
-    required: true,
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  name: String,
-  email: String,
-  college: String,
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+const participantSchema = new mongoose.Schema(
+  {
+    contestId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Contest",
+      required: true,
+    },
 
-module.exports = mongoose.model("Registration", registrationSchema);
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    name: {
+      type: String,
+      required: true,
+    },
+
+    email: {
+      type: String,
+      required: true,
+    },
+
+    college: {
+      type: String,
+      required: true,
+    },
+
+    year: {
+      type: String,
+    },
+
+    score: {
+      type: Number,
+      default: 0,
+    },
+
+    submittedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Participant", participantSchema);
