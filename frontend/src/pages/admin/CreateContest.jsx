@@ -33,17 +33,15 @@ export default function CreateContest() {
 
       const contestId = res.data._id;
 
-      // 🔥 Ask admin what to do next
-      const addProblem = window.confirm(
-        "Contest created successfully 🎉\n\nDo you want to add problems now?"
+      const addMore = window.confirm(
+        "✅ Contest created successfully!\n\nDo you want to add problems now?"
       );
 
-      if (addProblem) {
-        navigate(`/admin/add-problem/${contestId}`);
+      if (addMore) {
+        navigate(`/admin/contest/${contestId}/problems`);
       } else {
         navigate("/coding-contests");
       }
-
     } catch (err) {
       setError("Failed to create contest. Try again.");
     } finally {
@@ -64,34 +62,32 @@ export default function CreateContest() {
           </p>
 
           <div className="create-form">
-
             <div>
               <label>Contest Title *</label>
               <input
                 name="title"
-                placeholder="e.g. Weekly Coding Contest"
                 value={contest.title}
                 onChange={handleChange}
+                placeholder="Weekly Coding Contest"
               />
             </div>
 
             <div className="form-grid">
               <div>
-                <label>Duration (minutes) *</label>
+                <label>Duration (minutes)</label>
                 <input
-                  name="duration"
                   type="number"
-                  placeholder="90"
+                  name="duration"
                   value={contest.duration}
                   onChange={handleChange}
                 />
               </div>
 
               <div>
-                <label>Start Time *</label>
+                <label>Start Time</label>
                 <input
-                  name="startTime"
                   type="datetime-local"
+                  name="startTime"
                   value={contest.startTime}
                   onChange={handleChange}
                 />
@@ -102,7 +98,6 @@ export default function CreateContest() {
               <label>Description</label>
               <textarea
                 name="description"
-                placeholder="Contest rules, difficulty, scoring..."
                 value={contest.description}
                 onChange={handleChange}
               />
