@@ -23,7 +23,8 @@ import Leaderboard from "./pages/Leaderboard";
 import ContestDetails from "./pages/contest/ContestDetails";
 /* ===== Admin ===== */
 import CreateContest from "./pages/admin/CreateContest";
-import CreateContest from "./pages/admin/AddProblem";
+import AddProblem from "./pages/admin/AddProblem";
+
 
 /* ===== Utils ===== */
 import ProtectedRoute from "./ProtectedRoute";
