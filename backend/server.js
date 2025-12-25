@@ -6,7 +6,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const contestRoutes = require("./routes/contestRoutes");
 const problemRoutes = require("./routes/problemRoutes");
-
+const participantRoutes = require("./routes/participantRoutes");
 const app = express();
 
 /* ---------- CORS ---------- */
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/contests", contestRoutes);
 app.use("/api/problems", problemRoutes);
-
+app.use("/api/participants", participantRoutes);
 app.get("/", (req, res) => {
   res.send("Backend Running Successfully 🚀");
 });
