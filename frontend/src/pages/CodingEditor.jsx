@@ -1,21 +1,30 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import API from "../../api/axios";   // ✅ FIX
 
 export default function CodingEditor() {
   const { contestId } = useParams();
   const [problem, setProblem] = useState(null);
 
   useEffect(() => {
-    API.get(`/problems/contest/${contestId}`).then(res => {
-      setProblem(res.data[0]); // first problem
-    });
+    const fetchProblem = async () => {
+      try {
+        const res = await API.get(`/problems/contest/${contestId}`);
+        setProblem(res.data[0]); // Load first problem
+      } catch (err) {
+        console.error("Failed to load problem", err);
+      }
+    };
+
+    fetchProblem();
   }, [contestId]);
 
-  if (!problem) return <p>Loading...</p>;
+  if (!problem) return <p>Loading problem...</p>;
 
   return (
     <div className="dashboard-main">
       <h1>{problem.title}</h1>
+
       <p>{problem.description}</p>
 
       <h4>Input Format</h4>
@@ -24,10 +33,13 @@ export default function CodingEditor() {
       <h4>Output Format</h4>
       <pre>{problem.outputFormat}</pre>
 
-      <textarea placeholder="Write your code here..." />
+      <textarea
+        className="code-editor"
+        placeholder="Write your code here..."
+      />
 
-      <button>Run</button>
-      <button>Submit</button>
+      <button className="run-btn">Run</button>
+      <button className="submit-btn">Submit</button>
     </div>
   );
 }
