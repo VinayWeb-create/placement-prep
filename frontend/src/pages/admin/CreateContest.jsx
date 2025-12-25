@@ -29,9 +29,21 @@ export default function CreateContest() {
     setError("");
 
     try {
-      await API.post("/contests", contest);
-      alert("✅ Contest created successfully!");
-      navigate("/coding-contests");
+      const res = await API.post("/contests", contest);
+
+      const contestId = res.data._id;
+
+      // 🔥 Ask admin what to do next
+      const addProblem = window.confirm(
+        "Contest created successfully 🎉\n\nDo you want to add problems now?"
+      );
+
+      if (addProblem) {
+        navigate(`/admin/add-problem/${contestId}`);
+      } else {
+        navigate("/coding-contests");
+      }
+
     } catch (err) {
       setError("Failed to create contest. Try again.");
     } finally {
@@ -51,7 +63,6 @@ export default function CreateContest() {
             Setup a coding contest for participants
           </p>
 
-          {/* ===== FORM ===== */}
           <div className="create-form">
 
             <div>
@@ -88,28 +99,21 @@ export default function CreateContest() {
             </div>
 
             <div>
-              <label>Description (optional)</label>
+              <label>Description</label>
               <textarea
                 name="description"
-                placeholder="Contest rules, number of problems, scoring..."
+                placeholder="Contest rules, difficulty, scoring..."
                 value={contest.description}
                 onChange={handleChange}
               />
             </div>
 
-            {/* ERROR */}
-            {error && (
-              <p style={{ color: "#ff6a6a", fontSize: "14px" }}>
-                {error}
-              </p>
-            )}
+            {error && <p style={{ color: "#ff6a6a" }}>{error}</p>}
 
-            {/* ACTIONS */}
             <div className="create-actions">
               <button
                 className="btn-dark"
                 onClick={() => navigate("/coding-contests")}
-                disabled={loading}
               >
                 Cancel
               </button>
